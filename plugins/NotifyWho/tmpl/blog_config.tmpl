@@ -1,0 +1,224 @@
+<!--
+# NotifyWho?! plugin for Movable Type
+# Author: Jay Allen, Six Apart (http://www.sixapart.com)
+# Released under the Artistic License
+#
+# $Id: blog_config.tmpl 504 2008-02-28 02:11:03Z jallen $
+-->
+
+<mtapp:settinggroup
+    id="entry_notifications">
+
+    <h3><__trans phrase="Entry notifications"></h3>
+
+    <p><__trans phrase="The settings in this section allow you to configure the default recipients and content for entry notifications as well as whether or not they should be sent out, by default, automatically whenever an entry is newly published using these settings."></p>
+
+    <mtapp:setting
+        id="nw_entry_recips"
+        label="<__trans phrase="Notification recipients">"
+        show_hint="1"
+        hint="<__trans phrase="Note: Enter email addresses on separate lines or separated by commas.">">
+
+        <p>
+            <input type="checkbox" name="nw_entry_list" id="nw_entry_list" value="1" <mt:if name="nw_entry_list">checked="checked"</mt:if> />
+            <label for="nw_entry_list">Notification list subscribers, and/or</label>
+        </p>
+
+        <p>
+            <label for="nw_entry_emails"><__trans phrase="Other email addresses">:</label>
+        <textarea name="nw_entry_emails" id="nw_entry_emails" cols="60" rows="2"><mt:var name="nw_entry_emails" escape="html"></textarea>
+        </p>
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="nw_entry_content"
+        label="<__trans phrase="Notification content">"
+        show_hint="1"
+        hint="<__trans phrase="This message will be displayed along the link to the entry and any of the entry content you choose below.">">
+
+        <textarea style="width: 425px" name="nw_entry_message" id="nw_entry_message" cols="50" rows="3"><mt:var name="nw_entry_message" escape="html" /></textarea>
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="nw_entry_send_excerpt"
+        label="<__trans phrase="Entry text to include">"
+        indent="120">
+
+        <input type="radio" name="nw_entry_text" id="nw_entry_text_none" value="none" <mt:if name="nw_entry_text_none">checked="checked"</mt:if> />
+        <label for="nw_entry_text_none"><__trans phrase="None"></label>
+
+        <input type="radio" name="nw_entry_text" id="nw_entry_text_excerpt" value="excerpt" <mt:if name="nw_entry_text_excerpt">checked="checked"</mt:if> />
+        <label for="nw_entry_text_excerpt"><__trans phrase="Excerpt"></label>
+
+        <input type="radio" name="nw_entry_text" id="nw_entry_text_full" value="full" <mt:if name="nw_entry_text_full">checked="checked"</mt:if> />
+        <label for="nw_entry_text_full"><__trans phrase="Full"></label>       
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="nw_entry_auto_setting"
+        label="<__trans phrase="Automatic notification">"
+        hint="<__trans phrase="If checked, automatic delivery can be overridden on a per-entry basis.">"
+        show_hint="1">
+
+        <input type="checkbox" name="nw_entry_auto" id="nw_entry_auto" value="1" <mt:if name="nw_entry_auto_1">checked="checked"</mt:if> /> <label for="nw_entry_auto"><__trans phrase="Send a notification automatically when a new entry is published."></label>
+    </mtapp:setting>
+
+</mtapp:settinggroup>
+
+<mtapp:settinggroup
+    id="feedback_notifications">
+
+    <h3><__trans phrase="Feedback notifications"></h3>
+
+    <p><__trans phrase="These settings control the comment/TrackBack notification recipients if notifications are enabled.  Separate multiple recipients with commas and/or spaces."></p>
+    
+    <mtapp:setting
+        id="fback_recipients"
+        label="<__trans phrase="Notification recipients">"
+        show_hint="1"
+        hint="<__trans phrase="Note: Enter email addresses on separate lines or separated by commas.">">
+
+        <p>
+            <input type="checkbox" name="nw_fback_author" id="nw_fback_author" value="1" <mt:if name="nw_fback_author_1">checked="checked"</mt:if> />
+            <label for="nw_fback_author">Entry author, and/or</label>
+        </p>
+
+        <p>
+            <input type="checkbox" name="nw_fback_list" id="nw_fback_list" value="1" <mt:if name="nw_fback_list_1">checked="checked"</mt:if> />
+            <label for="nw_fback_list">Notification list subscribers, and/or</label>
+        </p>
+
+        <p>
+            <label for="nw_fback_emails"><__trans phrase="Other email addresses">:</label>
+        <textarea name="nw_fback_emails" id="nw_fback_emails" cols="60" rows="2"><mt:var name="nw_fback_emails" escape="html"></textarea>
+        </p>
+    </mtapp:setting>
+
+</mtapp:settinggroup>
+
+
+
+
+
+
+
+
+
+<mt:ignore>
+    ##################################################################
+    ##################################################################
+    ##################################################################
+    ##################################################################
+                    <span class="hint"><MT_TRANS phrase="Note: If you choose to send the entire entry, it will be sent as shown on the editing screen, without any text formatting applied."></span>
+
+<h3><MT_TRANS phrase="Entry notifications"></h3>
+
+<p><MT_TRANS phrase="The settings in this section allow you to configure the default recipients and content for entry notifications as well as whether or not they should be sent out, by default, automatically whenever an entry is newly published using these settings."></p>
+
+
+<fieldset>
+    <div id="nw_entry-notifications" class="field field-left-label pkg ">
+
+        <h4 style="margin-left: 20px;"><MT_TRANS phrase="Recipients"></h4>
+        <p style="margin-left: 20px;"><MT_TRANS phrase="The default recipients will be used in automatic entry notifications if they are enabled.  Otherwise, these values will be pre-filled on the notifications tab for each entry to aid manual notification sending."> </p>
+
+        <mtapp:setting
+            id="nw_entry_notify_list"
+            label="<__trans phrase="Send notification to">"
+            hint="<__trans phrase="Specify whether other blogs in the installation may publish content from this blog. This setting takes precedence over the default system aggregation policy found in the system-level MultiBlog configuration.">">
+
+            <ul>
+                <li style="margin-bottom: 10px;">
+                    <input type="checkbox" name="nw_entry_notify_list" id="nw_entry_notify_list" value="1" class="cb" <TMPL_IF NAME=NW_ENTRY_NOTIFY_LIST>checked="checked"</TMPL_IF> /> <label for="nw_entry_notify_list"><MT_TRANS phrase="Notification list subscribers, and/or"></label>
+                </li>
+                <li>
+                    <label for="nw_entry_notify_emails"><MT_TRANS phrase="Other email addresses">:</label><br />
+                    <textarea name="nw_entry_notify_emails" id="nw_entry_notify_emails" cols="60" rows="2"><TMPL_VAR NAME=NW_ENTRY_NOTIFY_EMAILS ESCAPE=HTML></textarea><span class="hint"><MT_TRANS phrase="Note: Enter email addresses on separate lines or separated by commas."></span>
+                </li>
+            </ul>
+        </mtapp:setting>
+    </div>
+</fieldset>
+
+
+
+
+
+
+
+
+<fieldset>
+    <h4 style="margin-left: 20px;"><MT_TRANS phrase="Content"></h4>
+
+    <p style="margin-left: 20px;"><MT_TRANS phrase="Your blog's name, this entry's title and a link to view it will be sent in the notification.  Additionally, you can add a  message, include an excerpt of the entry and/or send the entire entry."></p>
+
+    <div class="setting">
+        <div class="label">
+            <label for="message"><MT_TRANS phrase="Message to recipients (optional)">:</label>
+        </div>
+        <div class="field">
+            <textarea style="width: 425px" name="nw_entry_message" id="nw_entry_message" cols="50" rows="4"><TMPL_VAR NAME=NW_ENTRY_MESSAGE ESCAPE=HTML></textarea>
+        </div>
+    </div>
+    <div class="setting">
+        <div class="label">
+            <label><MT_TRANS phrase="Additional content to include (optional)">:</label>
+        </div>
+        <div class="field">
+            <ul>
+                <li>
+                    <input type="checkbox" name="nw_entry_send_excerpt" id="nw_entry_send_excerpt" value="1" class="cb" <TMPL_IF NAME=NW_ENTRY_SEND_EXCERPT>checked="checked"</TMPL_IF> /> <label for="nw_entry_send_excerpt"><MT_TRANS phrase="Entry excerpt"></label>
+                </li>
+                <li>
+                    <input type="checkbox" name="nw_entry_send_body" id="nw_entry_send_body" class="cb" value="1" <TMPL_IF NAME=NW_ENTRY_SEND_BODY>checked="checked"</TMPL_IF> /> <label for="nw_entry_send_body"><MT_TRANS phrase="Entire entry body"></label><br />
+                    <span class="hint"><MT_TRANS phrase="Note: If you choose to send the entire entry, it will be sent as shown on the editing screen, without any text formatting applied."></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <div class="setting grouped">
+
+        <h4 style="margin-left: 20px;"><MT_TRANS phrase="Automatic notifications"></h4>
+        <p style="margin-left: 20px;"><MT_TRANS phrase="When enabled, the option below will use the settings above to automatically send out entry notifications.  Notifications can always be sent manually regardless of this setting."></p>
+
+        <div class="label">
+            <label><MT_TRANS phrase="Automatic">:</label> 
+        </div>
+
+        <div class="field">
+            <ul>
+                <li style="margin-bottom: 10px;">
+                    <input type="checkbox" name="nw_entry_auto_notify" id="nw_entry_auto_notify" value="1" class="cb" <TMPL_IF NAME=NW_ENTRY_AUTO_NOTIFY>checked="checked"</TMPL_IF> onclick="if (this.checked) recipient_reminder(this.form);" /> <label for="nw_entry_auto_notify"><MT_TRANS phrase="Send entry notifications automatically."></label>
+                    <p><MT_TRANS phrase="This setting can be overridden on a per-entry basis."></p>
+                </li>
+            </ul><a href="/Users/jay/Sites/tdi.local/wellpoint4/cgi/mt/mt-static/mt_fr.js"></a>
+        </div>
+    </div>
+</fieldset>
+
+<h3><MT_TRANS phrase="Feedback notifications"></h3>
+
+<div class="setting">
+    <p style="margin: 0px 0px 10px 20px;"><MT_TRANS phrase="PLUGIN_SETTING_DESCRIPTION"></p>
+    <div class="label"><MT_TRANS phrase="AUTHOR"></div>
+    <div class="field">
+        <ul>
+        <li>
+            <input type="checkbox" name="nw_fback_author" id="nw_fback_author" value="1" class="cb" <TMPL_IF NAME=NW_FBACK_AUTHOR>checked="checked"</TMPL_IF> /> <MT_TRANS phrase="NOTIFY_AUTHOR_LABEL"><br />
+        </li>
+        </ul>
+    </div>
+    <div class="label"><MT_TRANS phrase="OTHERS"></div>
+    <div class="field">
+        <ul>
+        <li>
+            <input type="text" name="nw_fback_emails" size="50" value="<TMPL_IF NAME=NW_FBACK_EMAILS><TMPL_VAR NAME=NW_FBACK_EMAILS ESCAPE=HTML><TMPL_ELSE><MT_TRANS phrase="OTHERS_FIELD_HINT"></TMPL_IF>" onchange="dirty=1;" <TMPL_UNLESS NAME=NW_FBACK_EMAILS>onblur="if(this.value==''){this.style.color='#666'; this.form.reset()}else{if(dirty){multiEmail(this.value);}}" onfocus="if (! dirty){this.value = ''; this.style.color = '#000';}" style="color: #666"<TMPL_ELSE>onblur="if(dirty){multiEmail(this.value);}"</TMPL_UNLESS> />
+        </li>
+        </ul>
+<p><MT_TRANS phrase="FEEDBACK_CONTROL_NOTICE"></p>
+    </div>
+</div>
+</mt:ignore>

@@ -1,0 +1,7 @@
+TODOs for mt4-compatible branch of NotifyWho
+
+FIXME Need to re-localize all strings
+URGENT Add system-wide notification configuration which will be executed in addition to (but de-duped) the blog-level config
+URGENT The send_notify screen needs to be either shrunk or its window enlarged.
+TODO Update Plugin Manager package manifest for verion
+
